@@ -1,2 +1,0 @@
-# php-access-counter
-PHPでアクセスカウンター
