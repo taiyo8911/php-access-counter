@@ -1,15 +1,15 @@
 <?php
-  //カウント数が記録してあるファイルを読み書きできるモードで開く
-  $fp = fopen('count.dat', 'r+b');
+// カウント数が記録してあるファイルを開く
+$fp = fopen('count.dat', 'r+b');
 
-  //ファイルを排他ロックする
-  flock($fp, LOCK_EX);
+// ファイルをロックする
+flock($fp, LOCK_EX);
 
-  //ファイルからカウント数を取得する
-  $count = fgets($fp);
+// ファイルからカウント数を取得する
+$count = fgets($fp);
 
-  //カウント数を1増やす
-  $count++;
+// カウント数をインクリメントする
+$count++;
 ?>
 
 <!DOCTYPE html>
@@ -21,62 +21,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DIY Programmerの部屋</title>
         <meta name="description" content="日曜エンジニアが作ったアプリを公開しているサイト">
-
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
         <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
-
-
-        <!-- <meta property="og:url" content="">
-        <meta property="og:image" content="">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="">
-        <meta property="og:description" content="日曜エンジニアが作ったアプリを公開しているサイト"> -->
-
-        <!-- <link rel="icon" href="./favicon.ico"> -->
-
         <style>
-            body {
-                background-color: skyblue;
-                cursor: crosshair;
-            }
+        body {
+            background-color: skyblue;
+            cursor: crosshair;
+        }
 
-            h1 {
-                color: blue;
-                font-style: italic;
-            }
+        h1 {
+            color: blue;
+            font-style: italic;
+        }
 
-            div {
-                margin: 20px 0;
-            }
+        div {
+            margin: 20px 0;
+        }
 
-            div.container {
-                max-width: 800px;
-                margin: 0 auto;
-                text-align: center;
-            }
+        div.container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-            div.counter {
-                background-color: pink;
-                width: max-content;
-                margin: 0 auto;
-            }
+        div.counter {
+            background-color: pink;
+            width: max-content;
+            margin: 0 auto;
+        }
 
-            table {
-                margin: 0 auto;
-            }
+        table {
+            margin: 0 auto;
+        }
         </style>
     </head>
 
     <body oncontextmenu="alert('右クリックは禁止です！');">
         <div class="container">
             <div class="title_logo">
-                <!-- <img src="/images/logo.png" alt="タイトルロゴ" class=""> -->
                 <h1>DIY Programmerの部屋</h1>
                 <small>作りたいものは自分で作る！</small>
             </div>
 
             <marquee>Welcome to my homepage!</marquee>
-            <!-- <marquee behavior="alternate"><img src="" alt=""></marquee> -->
 
             <div class="counter">
                 <div>あなたは<?php echo $count; ?>人目の来訪者です。</div>
@@ -111,15 +98,15 @@
             <table class="contents" border="1">
                 <tbody>
                     <tr>
-                        <td class=""><a href="profile/">プロフィール</a></td>
+                        <td class="">プロフィール</td>
                         <td class="">管理人のプロフィールです。</td>
                     </tr>
                     <tr>
-                        <td class=""><a href="qa100/">100の質問</a></td>
+                        <td class="">100の質問</td>
                         <td class="">100の質問です。</td>
                     </tr>
                     <tr>
-                        <td class=""><a href="app/">アプリ</a></td>
+                        <td class="">アプリ</a></td>
                         <td class="">自作のアプリを公開しています。</td>
                     </tr>
                     <tr>
@@ -164,7 +151,7 @@
                     </tr>
                     <tr>
                         <td>使用OS</td>
-                        <td>macOS Montery </td>
+                        <td>macOS Montery</td>
                     </tr>
                 </tbody>
             </table>
@@ -180,24 +167,24 @@
 
         <!-- 右クリック禁止処理 -->
         <script>
-            function func1() {
-                alert("ごめんなさい。できません。")
-            }
+        function func1() {
+            alert("ごめんなさい。できません。")
+        }
         </script>
     </body>
 
 </html>
 
 <?php
-  //ポインターをファイルの先頭に戻す
-  rewind($fp);
+// ファイルのポインタを先頭に戻す
+rewind($fp);
 
-  //最新のアクセス数をファイルに書き込む
-  fwrite($fp, $count);
+// ファイルにカウント数を書き込む
+fwrite($fp, $count);
 
-  //ファイルのロックを解除する
-  flock($fp, LOCK_UN);
+// ファイルのロックを解除する
+flock($fp, LOCK_UN);
 
-  //ファイルを閉じる
-  fclose($fp);
+// ファイルを閉じる
+fclose($fp);
 ?>
